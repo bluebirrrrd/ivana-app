@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import {
+  Masthead,
+  MastheadToggle,
+  Page,
+  PageToggleButton,
+} from "@patternfly/react-core";
+import BarsIcon from "@patternfly/react-icons/dist/esm/icons/bars-icon";
+
 import "./App.css";
 import AuthorizedApp from "./components/AuthorizedApp";
 import UnauthorizedApp from "./components/UnauthorizedApp";
 import UserForm from "./components/UserForm";
 import Users from "./components/Users";
+import Sidebar from "./components/Sidebar";
+
 /* 
   /login UnauthorizedApp
      — login form
@@ -15,9 +25,36 @@ import Users from "./components/Users";
       /forma — a form to add user data
       /koristnici - saved users from the form
  */
-function App() {
+
+function Header(props) {
   return (
-    <div className="App">
+    <Masthead>
+      <MastheadToggle>
+        <PageToggleButton
+          variant="plain"
+          aria-label="Global navigation"
+          isNavOpen={props.isNavOpen}
+          onNavToggle={props.onNavToggle}
+        >
+          <BarsIcon />
+        </PageToggleButton>
+      </MastheadToggle>
+    </Masthead>
+  );
+}
+function App() {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const onNavToggle = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
+  return (
+    <Page
+      className="App"
+      header={<Header onNavToggle={onNavToggle} isNavOpen={isNavOpen} />}
+      sidebar={<Sidebar isNavOpen={isNavOpen} />}
+    >
       <Routes>
         <Route path="/" element={<AuthorizedApp />}>
           <Route path="korisnici" element={<Users />} />
@@ -25,7 +62,7 @@ function App() {
         </Route>
         <Route path="login" element={<UnauthorizedApp />} />
       </Routes>
-    </div>
+    </Page>
   );
 }
 
