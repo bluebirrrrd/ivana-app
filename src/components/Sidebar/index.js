@@ -1,12 +1,9 @@
 import { PageSidebar } from "@patternfly/react-core";
 import React from "react";
+import Navigation from "../Navigation";
 
 function Sidebar(props) {
-  return (
-    <PageSidebar isNavOpen={props.isNavOpen}>
-      This is Sidebar component
-    </PageSidebar>
-  );
+  return <PageSidebar isNavOpen={props.isNavOpen} nav={<Navigation />} />;
 }
 
 export default Sidebar;
