@@ -1,0 +1,6 @@
+.bottom {
+  position: absolute;
+  bottom: 1rem;
+  color: var(--pf-global--Color--light-100);
+  /* TODO: find a variable for text color */
+}

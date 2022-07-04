@@ -1,5 +1,6 @@
-import { Nav, NavItem, NavList } from "@patternfly/react-core";
-import { NavLink } from "react-router-dom";
+import { Button, Nav, NavItem, NavList } from "@patternfly/react-core";
+import { NavLink, Link } from "react-router-dom";
+import "./styles.css";
 
 const AppNavigation = (props) => {
   return (
@@ -18,6 +19,12 @@ const AppNavigation = (props) => {
           <NavLink to="login">Login</NavLink>
         </NavItem>
       </NavList>
+      <div className="bottom">
+        <span className="greeting">Hello user</span>
+        <Button>
+          <Link to="login">Log out</Link>
+        </Button>
+      </div>
     </Nav>
   );
 };
